@@ -11,9 +11,9 @@ intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="/", intents=intents)
 
 DATA_FILE = "data.json"
-YOUTUBE_API_KEY = "youtube_api_key"
-TWITCH_CLIENT_ID = "twitch_client_id"
-TWITCH_CLIENT_SECRET = "twitch_client_secret"
+YOUTUBE_API_KEY = "your_api_key"
+TWITCH_CLIENT_ID = "your_client_id"
+TWITCH_CLIENT_SECRET = "your_client_secret"
 twitch_token = None  # Globales Token, wird später gefüllt
 
 if not os.path.exists(DATA_FILE):
@@ -163,7 +163,7 @@ async def create_youtube_embed(yt_data):
     channel_url = f"https://www.youtube.com/channel/{yt_data['channelId']}"
 
     embed = discord.Embed(
-        title=f"{channel_title} hat ein neues Video hochgeladen.",
+        title=f"{channel_title} hat ein Video hochgeladen.",
         url=f"https://youtu.be/{video_id}",
         description=title,
         color=0xFF0000
@@ -181,9 +181,9 @@ async def create_twitch_button(twitch_name):
 
 async def create_twitch_embed(twitch_name, profile_img_url, stream_title):
     embed = discord.Embed(
-        title=stream_title,
+        title="Porze ist live.",
         url=f"https://twitch.tv/{twitch_name}",
-        description=f"🔴 {twitch_name} ist jetzt live!",
+        description=stream_title,
         color=0x9146FF
     )
     embed.set_thumbnail(url=profile_img_url)
@@ -334,7 +334,7 @@ async def on_ready():
                     user_data = (await user_req.json())["data"][0]
                     profile_img = user_data["profile_image_url"]
                     display_name = user_data["display_name"]
-                    embed = await create_twitch_embed(tag, profile_img, f"{display_name} ist live (Teststart)")
+                    embed = await create_twitch_embed(tag, profile_img, f"Vorschau: {display_name} ist live!")
                     view = await create_twitch_button(tag)
 
                     for ch_id in info["channels"]:
@@ -349,4 +349,4 @@ async def on_ready():
 
 # ======= START BOT =======
 
-bot.run("discord_bot_token")
+bot.run("your_discord_token")
