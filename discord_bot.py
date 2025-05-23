@@ -48,24 +48,6 @@ async def get_twitch_token():
 
 # ======= YOUTUBE =========
 
-@bot.tree.command(name="ab", description="Teste einen Livestream-Embed von BastiGHG.")
-async def ab(interaction: discord.Interaction, channel: discord.TextChannel):
-    embed = discord.Embed(
-        title="BastiGHG ist jetzt live!",
-        url="https://twitch.tv/bastighg",
-        description="**Schau jetzt rein und verpass nichts!**",
-        color=0x9146FF  # Twitch-Lila
-    )
-    embed.set_thumbnail(url="https://static-cdn.jtvnw.net/jtv_user_pictures/9d8d1f4d-8aa8-4fd7-8ef1-f57e3c7e0ad3-profile_image-300x300.png")
-    embed.set_footer(text="Twitch Livestream")
-    embed.timestamp = discord.utils.utcnow()
-
-    await channel.send(embed=embed)
-    await interaction.response.send_message(f"Embed gesendet in {channel.mention}", ephemeral=True)
-
-
-
-
 @bot.tree.command(name="ab_yt_dcc_add")
 async def ab_yt_dcc_add(interaction: discord.Interaction, dc_channel: discord.TextChannel, yt_tag: str):
     from googleapiclient.discovery import build
